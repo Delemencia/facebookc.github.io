@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: #f0f2f5; 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  
+  .window {
+    width: 400px;
+    background: white;
+    border: 1px solid #ccd0d5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+  }
+
+  
+  .blue-line {
+    width: 100%;
+    height: 32px;
+    background-color: #1877F2; 
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+
+  .content {
+    padding: 20px;
+    text-align: center;
+  }
+
+  
+  h1 {
+    font-size: 16px;
+    color: #1c1e21;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #dddfe2;
+  }
+
+  button {
+    width: 95%;
+    background-color: #4267b2;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  
+  #clown-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: black;
+    color: red;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  #clown-screen img {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="window" id="app-ui">
+    <div class="blue-line">Facebook AOL/SUPPORT mail cracker V4 </div>
+    <div class="content">
+      <h1>Target Email setup</h1>
+      <input type="text" placeholder="Username or Email">
+      <button style="background: #ebedf0; color: black; border: 1px solid #ccd0d5;">Open Password List</button>
+      <button style="background: #ebedf0; color: black; border: 1px solid #ccd0d5;">Open Proxy List</button>
+      <button onclick="triggerPrank()">Start</button>
+    </div>
+  </div>
+
+  <div id="clown-screen">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJib3ZidXN6bm96am56am56am56am56am56am56am56am56am5/3o7TKSjPqcKGRZaO3u/giphy.gif">
+    <h1 style="color: white; font-size: 40px;">skid detected, looooool.</h1>
+    <p>not today :D</p>
+    <button onclick="location.reload()" style="width: auto; padding: 10px 30px;">Close</button>
+  </div>
+
+  <script>
+    function triggerPrank() {
+      document.getElementById('app-ui').style.display = 'none';
+      document.getElementById('clown-screen').style.display = 'flex';
+      
+      
+      let audio = new Audio('https://www.myinstants.com/media/sounds/tuturu_1.mp3');
+      audio.play();
+    }
+  </script>
+
+</body>
+</html>
