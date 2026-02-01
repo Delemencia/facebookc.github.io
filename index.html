@@ -10,9 +10,9 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
   }
 
-  
   .window {
     width: 400px;
     background: white;
@@ -20,8 +20,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
   }
 
-  
-  .blue-line {
+  .title-bar {
     width: 100%;
     height: 32px;
     background-color: #1877F2; 
@@ -30,6 +29,7 @@
     display: flex;
     align-items: center;
     padding-left: 10px;
+    box-sizing: border-box;
   }
 
   .content {
@@ -37,11 +37,9 @@
     text-align: center;
   }
 
-  
   h1 {
     font-size: 16px;
     color: #1c1e21;
-    text-align: center;
     margin-bottom: 20px;
   }
 
@@ -63,53 +61,142 @@
     font-weight: bold;
   }
 
+  .secondary-btn {
+    background: #ebedf0;
+    color: black;
+    border: 1px solid #ccd0d5;
+  }
+
+  #list-screen {
+    display: none;
+  }
   
-  #clown-screen {
+  .list-box {
+    text-align: left;
+    background: #f0f2f5;
+    padding: 10px;
+    font-family: monospace;
+    height: 120px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  #prank-screen {
     display: none;
     position: fixed;
     inset: 0;
     background: black;
-    color: red;
+    color: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 100;
   }
 
-  #clown-screen img {
-    width: 300px;
+  .status-img {
+    width: 400px;
     margin-bottom: 20px;
+  }
+
+  .huge-text {
+    font-size: 52px;
+    font-weight: bold;
+    color: white;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  #loading-bar-container {
+    display: none;
+    width: 90%;
+    background: #eee;
+    height: 20px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+  }
+
+  #loading-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: #1877F2;
+    transition: width 0.1s;
   }
 </style>
 </head>
 <body>
 
-  <div class="window" id="app-ui">
-    <div class="blue-line">Facebook AOL/SUPPORT mail cracker V4 </div>
+  <div class="window" id="main-ui">
+    <div class="title-bar">System Portal V4</div>
     <div class="content">
-      <h1>Target Email setup</h1>
-      <input type="text" placeholder="Username or Email">
-      <button style="background: #ebedf0; color: black; border: 1px solid #ccd0d5;">Open Password List</button>
-      <button style="background: #ebedf0; color: black; border: 1px solid #ccd0d5;">Open Proxy List</button>
-      <button onclick="triggerPrank()">Start</button>
+      <h1>Configuration Setup</h1>
+      <input type="text" placeholder="Identity or ID">
+      <button class="secondary-btn" onclick="showList()">Open Password List</button>
+      <button class="secondary-btn" onclick="startLoading()">Open Proxy List</button>
+      <div id="loading-bar-container">
+        <div id="loading-bar-fill"></div>
+      </div>
+      <button id="exec-btn" onclick="startLoading()">Start</button>
     </div>
   </div>
 
-  <div id="clown-screen">
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJib3ZidXN6bm96am56am56am56am56am56am56am56am56am5/3o7TKSjPqcKGRZaO3u/giphy.gif">
-    <h1 style="color: white; font-size: 40px;">HAHAHAHAHAHHAHHHAHAAHHA.</h1>
-    <p>YOUR EMBARRASSING!</p>
-    <button onclick="location.reload()" style="width: auto; padding: 10px 30px;">Close</button>
+  <div class="window" id="list-screen">
+    <div class="title-bar">Local Database</div>
+    <div class="content">
+      <h1>Generated Passwords</h1>
+      <div class="list-box">
+        p@ssw0rd_alpha_99<br>
+        user_temp_4821<br>
+        hidden_key_0x5F<br>
+        secure_vault_77<br>
+        admin_root_access<br>
+        guest_login_2024<br>
+        alpha_bravo_delta
+      </div>
+      <button class="secondary-btn" onclick="goBack()">Back</button>
+    </div>
+  </div>
+
+  <div id="prank-screen">
+    <img class="status-img" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJib3ZidXN6bm96am56am56am56am56am56am56am56am56am5/3o7TKSjPqcKGRZaO3u/giphy.gif">
+    <div class="huge-text">HAHAHAHAHAHAHAHAHAHAHAHAHAH.</div>
+    <p style="color: red; font-size: 24px; font-weight: bold;">your just embarrassing. Skid!</p>
+    <button onclick="location.reload()" style="width: auto; padding: 10px 40px; margin-top: 20px;">Close</button>
   </div>
 
   <script>
+    function startLoading() {
+      document.getElementById('loading-bar-container').style.display = 'block';
+      let fill = document.getElementById('loading-bar-fill');
+      let width = 0;
+      let interval = setInterval(function() {
+        if (width >= 100) {
+          clearInterval(interval);
+          triggerPrank();
+        } else {
+          width++;
+          fill.style.width = width + '%';
+        }
+      }, 30);
+    }
+
     function triggerPrank() {
-      document.getElementById('app-ui').style.display = 'none';
-      document.getElementById('clown-screen').style.display = 'flex';
+      document.getElementById('main-ui').style.display = 'none';
+      document.getElementById('list-screen').style.display = 'none';
+      document.getElementById('prank-screen').style.display = 'flex';
       
-      
-      let audio = new Audio('https://www.myinstants.com/media/sounds/tuturu_1.mp3');
+      let audio = new Audio('https://www.soundjay.com/human/man-laughing-01.mp3');
       audio.play();
+    }
+
+    function showList() {
+      document.getElementById('main-ui').style.display = 'none';
+      document.getElementById('list-screen').style.display = 'block';
+    }
+
+    function goBack() {
+      document.getElementById('list-screen').style.display = 'none';
+      document.getElementById('main-ui').style.display = 'block';
     }
   </script>
 
